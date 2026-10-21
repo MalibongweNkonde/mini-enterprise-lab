@@ -57,11 +57,15 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 | 40       | DMZ           | 10.0.40.0/24 | 10.0.40.1 | Public facing services        |
 | 50       | Testing       | 10.0.50.0/24 | 10.0.50.1 | Temporary test VMs            |
 
-## IP Addressing
+## Static IP Address assignment
 
-| Device         | IP Address                |
-| -------------- | ------------------------- |
-| fw-pfsense     | 10.0.0.1                  |
-| mgnt-box       | 10.0.0.10 (Initial Setup) |
-| devops-box     | 10.0.20.10                |
-| alma-server-01 | 10.0.30.10                |
+| Device                        | VLAN      | IP Address |
+| ----------------------------- | --------- | ---------- |
+| fw-pfsense                    | Bootstrap | 10.0.0.1   |
+|                               |           |            |
+| mgnt-box                      | 10        | 10.0.10.10 |
+| -- pfsense management gateway | 10        | 10.0.10.1  |
+| devops-box                    | 20        | 10.0.20.10 |
+| --pfsense devops gateway      | 20        | 10..0.20.1 |
+| alma-server-01                | 30        | 10.0.30.10 |
+| -- pfsense server gateway     | 30        | 10.0.30.1  |
