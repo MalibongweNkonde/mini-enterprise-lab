@@ -1,8 +1,20 @@
-# Global Topology & Resource Allocations
+# Global Topology, Network Design and Resource Allocations
 
-## Objective
+## Overview
 
 This document outlines the architectural blueprint, physical/virtal hardware boundaries, and global network schema for the entire lab environment. It establishes the foundational baseline required to ensure performance optimization and predictable routing behaviours before any induvidual operating system is deployed.
+
+## Objectives
+
+* Isolate the Linux servers from the physical host's physical network.
+
+* Centralize routing and firewall control through pfSense
+
+* Separate adminstrative access from server workloads.
+
+* Restrict traffic betwen network segments.
+
+* Provide a reproducible environment for learning linux adminstration,
 
 ## Logical Architecture
 
@@ -22,28 +34,22 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 
 * **Storage:** 1 TB SATA SSD
 
+* **Network:** Wried connection from Cudy WR1200 router receiving internet from a huawei pocket router.
+
 ### Resource Allocation Matrix
 
-| VM ID | Machine Name | OS            | vCPUs | RAM   | Storage | Primary Network Bridge     |
-| ----- | ------------ | ------------- | ----- | ----- | ------- | -------------------------- |
-| 100   | fw-pfsense   | pfSense 2.7.1 | 1     | 1.5GB | 20GB    | vtnet0 (WAN), vtnet1 (LAN) |
-| 101   | mgmt-box     | Debian        | 1     | 2GB   | 100GB   |                            |
-| 102   | devopsVM     | Debian        | 2     | 4GB   | 40GB    |                            |
-| 103   | app-node-01  | Debian        | 1     | 2GB   | 40GB    |                            |
-| 104   | app-node-02  | Debian        | 1     | 2GB   | 40GB    |                            |
+| VM ID | Machine Name | OS               | vCPUs | RAM | Storage | Primary Network Bridge   | Purpose                            |
+| ----- | ------------ | ---------------- | ----- | --- | ------- | ------------------------ | ---------------------------------- |
+| 100   | fw-pfsense   | pfSense 2.7.1    | 1     | 1GB | 20GB    | pfwan (WAN), pflan (LAN) | Firewall and router                |
+| 101   | mgmt-box     | Debian 13        | 1     | 2GB | 20GB    | pflan                    | Administration and troubleshooting |
+| 102   | devopsVM     | Debian 13        | 2     | 4GB | 40GB    | pflan                    | Orchestration and deployment       |
+| 103   | alma-server  | Alma Server 10.2 | 1     | 2GB | 40GB    | pflan                    | Enterprise Linux Adminstration     |
+| 104   | app-node-01  | Debian 13s       | 1     | 2GB | 40GB    | pflan                    | Applications                       |
 
-## Global IP & Subnet Schema
+## VLAN Design
 
-## Network Virtual Bridges (VLANs / Virtual Switches)
 
-* **default (WAN):** Pulls an IP via DHCP from the physical home router. 
 
-* **pflan (LAN):**
+## IP Addressing
 
-## Global Infrastructure Prerequisites
 
-Before proceeding with individual operating system deployment, ensure the following prerequisites are met:
-
-1. Virtal Swtiches  ('default', 'pflan') must be created on the hyperviser host with no physical network cards assigned to them. This guarantees full host-only isolation.
-
-2. MAC Addres spaing must be randomised across all hosts to prevent potential ARP conflicts.
