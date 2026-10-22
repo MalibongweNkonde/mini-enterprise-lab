@@ -36,14 +36,14 @@ insert topology diagram here
 
 Click on any module below to view the comprehensive step-by-step installation, configuration, and engineering logs.
 
-* Module 01: [Global Topology & Resource Allocation](./docs/01-topology)
+* Module 01: [Global Topology, Resource Allocation and Network Design](./docs/01-topology)
 
-* Module 02: [](./docs/)
+* Module 02: [Setting up pfSense](./docs/02-pfsense.md)
 
-* Module 03:
+* Module 03: Will be updated as lab continues to grow.
 
-## Checklist
+# Project Status
 
-- [ ] 
+In Progress.
 
-
+The project will be updaed as additional components are deployed, tests and documented.

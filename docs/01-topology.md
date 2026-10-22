@@ -1,4 +1,4 @@
-# Global Topology, Network Design and Resource Allocations
+# Global Topology,Resource Allocations and Network Design
 
 ## Overview
 
@@ -22,7 +22,7 @@ Below is the structural breakdown of the environment's network zones.
 
 (Insert Diagram Here)
 
-## Hypervisor Configuration & Hardware Specs
+# Hypervisor Configuration & Hardware Specs
 
 The environment is hosted on QEMU/KVM managed via virt-manager running on top of Debain 13. 
 
@@ -45,6 +45,8 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 | 102   | devops-box     | Debian 13        | 2     | 4GB | 40GB    | pflan                    | Orchestration and deployment       |
 | 103   | alma-server-01 | Alma Server 10.2 | 1     | 2GB | 40GB    | pflan                    | Enterprise Linux Adminstration     |
 | 104   | app-node-01    | Debian 13s       | 1     | 2GB | 40GB    | pflan                    | Applications                       |
+
+# Network Design
 
 ## VLAN Design
 
@@ -69,3 +71,17 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 | --pfsense devops gateway      | 20        | 10..0.20.1 |
 | alma-server-01                | 30        | 10.0.30.10 |
 | -- pfsense server gateway     | 30        | 10.0.30.1  |
+
+## Security Controls
+
+-  Isolaed lab networks.
+
+- Segmented management and server traffic.
+
+- Restricted inter-VLAN communication.
+
+- SSH-based remote administration
+
+- Host-level firewall configuration.
+
+- Verfiication of allowed and denied traffic.
