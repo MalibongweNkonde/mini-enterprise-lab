@@ -55,14 +55,14 @@ ISO:
 
     Link for exact pfsense version found here: [pfsense](htts://archive.org/details/pfsense-ce-2.7.2-release-amd64_202507)
 
-![ISO selection](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2019-58-44.png)
+![ISO selection](../screenshots/pfsense/Screenshot%20From%202026-10-21%2019-58-44.png)
 
 RAM and vCPU allocation:
 
-![RAM and CPU](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-02-31.png)
+![RAM and CPU](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-02-31.png)
 Network Adapters:
 
-![Network Adpaters](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2019-57-07.png)
+![Network Adpaters](../screenshots/pfsense/Screenshot%20From%202026-10-21%2019-57-07.png)
 
 ## Step 2 - Installation of pfSense
 
@@ -80,28 +80,28 @@ Installation steps:
 
 It recognised both interfaces:
 
-![interfaces recognised](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-06-24.png)
+![interfaces recognised](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-06-24.png)
 
 I then assigned the interfaces as follows:
 
     WAN: vtnet0 (pfwan)
     LAN: vtnet1 (pflan)
 
-![assigning interfaces](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-08-32.png)
+![assigning interfaces](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-08-32.png)
 
 Both networks netorwks were assigned IPs as follows:
 
-    vtnet0: 192.168.100.240/24 (receives an IP address from my home router)
+    vtnet0: 192.168.100.240/24 (virtual WAN network)
     vtnet1: 192.168.1.1/24 (Static IP)
 
-![Default IP assignment](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-09-36.png)
+![Default IP assignment](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-09-36.png)
 
 I changed the IP adrress of the vtnet1 to a more cleaner nd easier to read one:
 
     vtnet1: 192.168.1.1/24 to 10.0.0.1/24
     DHCP range: 10.0.0.10 - 10.0.0.50
 
-![IP change](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-20-28.png)
+![IP change](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-20-28.png)
 
 # Firewall Configuration
 
@@ -121,8 +121,6 @@ I changed the IP adrress of the vtnet1 to a more cleaner nd easier to read one:
     DNS: 10.0.0.1
 
 (Inset Screenshot)
-
-
 
 # VLAN Configuration
 
@@ -165,5 +163,3 @@ From mgnt-box:
     ping: google.com
 
 ![Successful DNS resolution]()
-
- 
