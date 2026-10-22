@@ -44,8 +44,8 @@ Configuration:
 
     Interface: pflan
     Network: Isolated
-    IP Address: 10.0.0.1
-    DHCP range: 10.0.0.10 - 10.0.0.50
+    IP Address: Unassigned
+    DHCP range: Unassigned
 
 # Installation Process
 
@@ -66,4 +66,104 @@ Network Adapters:
 
 ## Step 2 - Installation of pfSense
 
+Installation steps:
 
+1. Boot rfom pfsense ISO after adding both virtual networks from the "Add Harware" menu option. 
+
+2. Accept license agreements and select install option.
+
+3. Choose file system.
+
+4. Reboot after installation
+
+### Step 3 - Interface Assignment after installation.
+
+It recognised both interfaces:
+
+![interfaces recognised](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-06-24.png)
+
+I then assigned the interfaces as follows:
+
+    WAN: vtnet0 (pfwan)
+    LAN: vtnet1 (pflan)
+
+![assigning interfaces](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-08-32.png)
+
+Both networks netorwks were assigned IPs as follows:
+
+    vtnet0: 192.168.100.240/24 (receives an IP address from my home router)
+    vtnet1: 192.168.1.1/24 (Static IP)
+
+![Default IP assignment](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-09-36.png)
+
+I changed the IP adrress of the vtnet1 to a more cleaner nd easier to read one:
+
+    vtnet1: 192.168.1.1/24 to 10.0.0.1/24
+    DHCP range: 10.0.0.10 - 10.0.0.50
+
+![IP change](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-21%2020-20-28.png)
+
+# Firewall Configuration
+
+## Default Rules
+
+| Interface | Rule                      | Purpose                     |
+| --------- | ------------------------- | --------------------------- |
+| LAN       | Allow LAN to Any          | VMs can access the internet |
+| WAN       | Block unsolicited traffic | Protect internal network    |
+
+(insert Screenshot)
+
+# DHCP Configuration
+
+    Range: 10.0.0.10 - 10.0.0.50
+    Gateway: 10.0.0.1
+    DNS: 10.0.0.1
+
+(Inset Screenshot)
+
+
+
+# VLAN Configuration
+
+## Interfaces
+
+| Interface | VLAN | Gateway |
+| --------- | ---- | ------- |
+| LAN       |      |         |
+|           |      |         |
+|           |      |         |
+|           |      |         |
+|           |      |         |
+|           |      |         |
+|           |      |         |
+
+![Interface Assignment]()
+
+# Testing
+
+## Connectivity Tests
+
+Conduncting tests to confirm if pfsense can allocate IPs dynamically and if devices connected behind pfsense can access the internet.
+
+### pfSense Internet Test
+
+Testing Diagnostics &rarr; Ping
+
+    Target: 8.8.8.8
+
+![Ping Successful]()
+
+### LAN Device Test
+
+From mgnt-box: 
+
+    Can reach router
+    ping: 10.0.0.1
+    
+    Internet Test
+    ping: google.com
+
+![Successful DNS resolution]()
+
+ 
