@@ -10,13 +10,11 @@ For now I am using 10.0.0.10 on the mgnt-box for setting up pfSense and I cannot
 
 I'm creating xml backups of pfwan, pflan, fw-pfsense and mgnt-box configurations on my host mahine.
 
-![pfwan XML backup](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2015-28-02.png)
+![pfwan XML backup](../screenshots/host-system/Screenshot%20From%202026-10-23%2015-28-02.png)
 
 The same backup was performed for the rest of the listed items..
 
 Commands: 
-
-    
 
 ```
 mkdir labs-backups
@@ -29,3 +27,61 @@ sudo virsh dumpxml fw-pfsense > labs-backups/fw-pfsense.xml
 
 sudo virsh dumpxml debian12 > labs-backups/debian12.xml
 ```
+
+## VLAN Setup.
+
+We create a temp bridge that for now will not survive a reboot, for testing purposes.
+
+Commands:
+
+    sudo ip link add br-vlan type bridge
+    sudo ip link set dev br-vlan up
+    ip -d link show br-vlan
+
+![br-vlan](../screenshots/host-system/Screenshot%20From%202026-10-23%2015-53-58.png)
+
+The bridge now exists. We then enable VLAN filtering:
+
+Commands:
+
+    sudo ip link set dev br-vlan type bridge vlan_filtering 1
+    sudo /usr/sbin/bridge vlan show
+
+![br-vlan appears untagged](../screenshots/host-system/Screenshot%20From%202026-10-23%2015-57-55.png)
+
+The bridge is now configured correctly with 802.1Q VLAN filtering enabled.
+
+## Attach a temporary VLAN trunk to pfSense
+
+### Create the interface definition.
+
+Command:
+
+    cat > /tmp/pfsense-trunk.xml <<'EOF'
+    <interface type='bridge'>
+      <mac address='52:54:00:10:00:01'/>
+      <source bridge='br-vlan'/>
+      <model type='virtio'/>
+      <vlan trunk='yes'>
+        <tag id='10'/>
+        <tag id='20'/>
+        <tag id='30'/>
+        <tag id='40'/>
+        <tag id='50'/>
+      </vlan>
+    </interface>
+    EOF
+
+This  defines a trunk that carries 5 VLANs as outlined on the topology document, in the VLAN design section.
+
+### Attach it to the running VM
+
+Command:
+
+    sudo virsh attach-device fw-pfsense /tmp/pfsense-trunk.xml --live
+
+![Device Attached successfully](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2016-26-44.png)
+
+The live bridge appears to be attached.
+
+

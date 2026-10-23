@@ -150,7 +150,7 @@ Testing Diagnostics &rarr; Ping
 
     Target: 8.8.8.8
 
-![Ping Successful](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-23%2015-05-19.png)
+![Ping Successful](../screenshots/pfsense/Screenshot%20From%202026-10-23%2015-05-19.png)
 
 ### LAN Device Test
 
@@ -162,7 +162,15 @@ From mgnt-box:
     Internet Test
     ping: google.com
 
-![Successful DNS resolution](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/management/Screenshot%20From%202026-10-23%2015-01-13.png)
+![Successful DNS resolution](../screenshots/management/Screenshot%20From%202026-10-23%2015-01-13.png)
+
+### Accessing pfSense from mgnt-box
+
+From mgnt-box browser:
+
+    https://10.0.0.1
+
+![dashboard](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-23%2016-32-39.png)
 
 # Challenges Encountered
 
@@ -186,5 +194,3 @@ Running the commands shows us that 'bridge' is on the system. It just isn't on t
 Running this command produces the desired result listing on bridges
 
     sudo /usr/sbin/bridge vlan show
-
-
