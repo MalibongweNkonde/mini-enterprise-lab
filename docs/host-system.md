@@ -12,4 +12,20 @@ I'm creating xml backups of pfwan, pflan, fw-pfsense and mgnt-box configurations
 
 ![pfwan XML backup](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2015-28-02.png)
 
-I did this
+The same backup was performed for the rest of the listed items..
+
+Commands: 
+
+    
+
+```
+mkdir labs-backups
+
+sudo virsh net-dumpxml pfwan > labs-backups/pfwan.xml
+
+sudo virsh net-dumpxml pflan > labs-backups/pflan.xml
+
+sudo virsh dumpxml fw-pfsense > labs-backups/fw-pfsense.xml
+
+sudo virsh dumpxml debian12 > labs-backups/debian12.xml
+```
