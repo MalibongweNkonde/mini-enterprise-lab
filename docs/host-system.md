@@ -80,7 +80,7 @@ Command:
 
     sudo virsh attach-device fw-pfsense /tmp/pfsense-trunk.xml --live
 
-![Device Attached successfully](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2016-26-44.png)
+![Device Attached successfully](../screenshots/host-system/Screenshot%20From%202026-10-23%2016-26-44.png)
 
 The live bridge appears to be attached.
 
@@ -94,8 +94,6 @@ Run this command inside the pfsense web interface through:
 
 Diagnostics &rarr; Command Prompt.
 
-![Inside pfSense](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2016-40-04.png)
+![Inside pfSense](../screenshots/host-system/Screenshot%20From%202026-10-23%2016-40-04.png)
 
 We see vtnet2 show up with the MAC address 52:54:00:10:00:01, the same address from our other screenshots.
-
-
