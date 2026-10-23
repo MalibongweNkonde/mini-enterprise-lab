@@ -77,11 +77,9 @@ Go to Services &rarr; DHCP Server and open the MGNT_VLAN10 tab.
 
 Enable DHCP and set the range to:
 
-    Range: 10.0.0.10 - 10.0.0.50
-    Gateway: 10.0.0.1
-    DNS: 10.0.0.1
-
-
+    Range: 10.0.10.100 - 10.0.10.200
+    Gateway: 10.0.10.1
+    
 
 #### Verified Results
 
@@ -99,11 +97,11 @@ Enable DHCP and set the range to:
 
 - [x] Existing WAN and LAN connections remain present during these steps.
 
+- [x] VLAN 10 interfae configured in pfSense.
+
+- [x] VLAN 10 gateway configured as 10.0.10.1/24
+
 #### Not Yet Verified
-
-- [ ] VLAN 10 interfae configured in pfSense.
-
-- [ ] VLAN 10 gateway configured as 10.0.10.1/24
 
 - [ ] DHCP on VLAN 10 tested.
 
