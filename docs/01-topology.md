@@ -38,26 +38,26 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 
 ### Resource Allocation Matrix
 
-| VM ID | Machine Name   | OS               | vCPUs | RAM | Storage | Primary Network Bridge   | Purpose                            |
-| ----- | -------------- | ---------------- | ----- | --- | ------- | ------------------------ | ---------------------------------- |
-| 100   | fw-pfsense     | pfSense 2.7.1    | 1     | 1GB | 20GB    | pfwan (WAN), pflan (LAN) | Firewall and router                |
-| 101   | mgmt-box       | Debian 13        | 1     | 2GB | 20GB    | pflan                    | Administration and troubleshooting |
-| 102   | devops-box     | Debian 13        | 2     | 4GB | 40GB    | pflan                    | Orchestration and deployment       |
-| 103   | alma-server-01 | Alma Server 10.2 | 1     | 2GB | 40GB    | pflan                    | Enterprise Linux Adminstration     |
-| 104   | app-node-01    | Debian 13s       | 1     | 2GB | 40GB    | pflan                    | Applications                       |
+| VM ID | Machine Name   | OS             | vCPUs | RAM | Storage | Primary Network Bridge   | Purpose                            |
+| ----- | -------------- | -------------- | ----- | --- | ------- | ------------------------ | ---------------------------------- |
+| 100   | fw-pfsense     | pfSense 2.7.2  | 1     | 1GB | 20GB    | pfwan (WAN), pflan (LAN) | Firewall and router                |
+| 101   | mgnt-box       | Debian 13      | 1     | 2GB | 20GB    | pflan                    | Administration and troubleshooting |
+| 102   | devops-box     | Debian 13      | 2     | 4GB | 40GB    | pflan                    | Orchestration and deployment       |
+| 103   | alma-server-01 | AlmaLinux 10.2 | 1     | 2GB | 40GB    | pflan                    | Enterprise Linux Adminstration     |
+| 104   | app-node-01    | Debian 13      | 1     | 2GB | 40GB    | pflan                    | Applications                       |
 
 # Network Design
 
 ## VLAN Design
 
-| VLAN     | Name          | Subnet       | Gateway   | Purpose                       |
-| -------- | ------------- | ------------ | --------- | ----------------------------- |
-| untagged | Bootstrap LAN | 10.0.0.0/24  | 10.0.0.1  | Initial setup and migration   |
-| 10       | Management    | 10.0.10.0/24 | 10.0.10.1 | Administration                |
-| 20       | DevOps        | 10.0.20.0/24 | 10.0.20.1 | Development operations        |
-| 30       | Servers       | 10.0.30.0/24 | 10.0.30.1 | Debian, RHEL and Alma Servers |
-| 40       | DMZ           | 10.0.40.0/24 | 10.0.40.1 | Public facing services        |
-| 50       | Testing       | 10.0.50.0/24 | 10.0.50.1 | Temporary test VMs            |
+| VLAN     | Name          | Subnet       | Gateway   | Purpose                                                         |
+| -------- | ------------- | ------------ | --------- | --------------------------------------------------------------- |
+| untagged | Bootstrap LAN | 10.0.0.0/24  | 10.0.0.1  | Initial setup and migration                                     |
+| 10       | Management    | 10.0.10.0/24 | 10.0.10.1 | Administration                                                  |
+| 20       | DevOps        | 10.0.20.0/24 | 10.0.20.1 | Automation CI/CD and development operations                     |
+| 30       | Servers       | 10.0.30.0/24 | 10.0.30.1 | Debian, RHEL* and Alma server workloads                         |
+| 40       | DMZ           | 10.0.40.0/24 | 10.0.40.1 | Public facing services needing more restricted network boundary |
+| 50       | Testing       | 10.0.50.0/24 | 10.0.50.1 | Isolated testing and experimenting                              |
 
 ## Static IP Address assignment
 
@@ -68,13 +68,13 @@ The environment is hosted on QEMU/KVM managed via virt-manager running on top of
 | mgnt-box                      | 10        | 10.0.10.10 |
 | -- pfsense management gateway | 10        | 10.0.10.1  |
 | devops-box                    | 20        | 10.0.20.10 |
-| --pfsense devops gateway      | 20        | 10..0.20.1 |
+| --pfsense devops gateway      | 20        | 10.0.20.1  |
 | alma-server-01                | 30        | 10.0.30.10 |
 | -- pfsense server gateway     | 30        | 10.0.30.1  |
 
 ## Security Controls
 
--  Isolaed lab networks.
+- Isolaed lab networks.
 
 - Segmented management and server traffic.
 

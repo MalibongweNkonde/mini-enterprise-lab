@@ -150,7 +150,7 @@ Testing Diagnostics &rarr; Ping
 
     Target: 8.8.8.8
 
-![Ping Successful]()
+![Ping Successful](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-23%2015-05-19.png)
 
 ### LAN Device Test
 
@@ -162,4 +162,29 @@ From mgnt-box:
     Internet Test
     ping: google.com
 
-![Successful DNS resolution]()
+![Successful DNS resolution](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/management/Screenshot%20From%202026-10-23%2015-01-13.png)
+
+# Challenges Encountered
+
+## Issue 1
+
+#### Symptom:
+
+- iproute2 is installed on host but running command "bridge vlan show" says result not found.
+
+#### Cause:
+
+Running the commands shows us that 'bridge' is on the system. It just isn't on the my user's PATH.
+
+    command -v ip
+    command -v bridge
+    dpkg -L iproute2 | grep '/bridge$'
+    ls -l /usr/sbin/bridge /sbin/bridge 2>/dev/null
+
+#### Resolution:
+
+Running this command produces the desired result listing on bridges
+
+    sudo /usr/sbin/bridge vlan show
+
+
