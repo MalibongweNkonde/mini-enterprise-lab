@@ -107,22 +107,38 @@ I changed the IP adrress of the vtnet1 to a more cleaner nd easier to read one:
 
 ## Default Rules
 
-| Interface | Rule                      | Purpose                     |
-| --------- | ------------------------- | --------------------------- |
-| LAN       | Allow LAN to Any          | VMs can access the internet |
-| WAN       | Block unsolicited traffic | Protect internal network    |
-
-(insert Screenshot)
-
-# DHCP Configuration
-
-    Range: 10.0.0.10 - 10.0.0.50
-    Gateway: 10.0.0.1
-    DNS: 10.0.0.1
-
-(Inset Screenshot)
+(To be updated)
 
 # VLAN Configuration
+
+Read [host-system](../docs/host-system.md) first for bridge configuration
+
+## Create VLANs
+
+#### Configuring Management first. On the web interface:
+
+Interfaces &rarr; Assignments &rarr; VLANs and add a VLAN
+
+    Parent Interface: vtnet2
+    VLAN Tag: 10  
+    Description: MGNT_VLAN10
+
+#### Assign VLAN 10 as a pfsense interface:
+
+Go to Interfaces &rarr; Assignments &rarr; Available network ports and select the newly created interface.
+
+Click on the newly assigned interface and configure it as follows:
+
+    Enable: Checked
+    Description: MGNT_VLAN10
+    IPv4 Configuration: Static
+    IPv4 Address: 10.0.10.1/24
+
+#### Enable DHCP for Management:
+
+Go to Services &rarr; DHCP Server and open the MGNT_VLAN10 tab.
+
+Enable DHCP and set the range to:
 
 ## Interfaces
 
