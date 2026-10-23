@@ -135,7 +135,7 @@ From mgnt-box browser:
 
     https://10.0.0.1
 
-![dashboard](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-23%2016-32-39.png)
+![dashboard](../screenshots/pfsense/Screenshot%20From%202026-10-23%2016-32-39.png)
 
 # Firewall Configuration
 
