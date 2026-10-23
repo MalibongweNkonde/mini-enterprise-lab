@@ -103,57 +103,6 @@ I changed the IP adrress of the vtnet1 to a more cleaner nd easier to read one:
 
 ![IP change](../screenshots/pfsense/Screenshot%20From%202026-10-21%2020-20-28.png)
 
-# Firewall Configuration
-
-## Default Rules
-
-(To be updated)
-
-# VLAN Configuration
-
-Read [host-system](../docs/host-system.md) first for bridge configuration
-
-## Create VLANs
-
-#### Configuring Management first. On the web interface:
-
-Interfaces &rarr; Assignments &rarr; VLANs and add a VLAN
-
-    Parent Interface: vtnet2
-    VLAN Tag: 10  
-    Description: MGNT_VLAN10
-
-#### Assign VLAN 10 as a pfsense interface:
-
-Go to Interfaces &rarr; Assignments &rarr; Available network ports and select the newly created interface.
-
-Click on the newly assigned interface and configure it as follows:
-
-    Enable: Checked
-    Description: MGNT_VLAN10
-    IPv4 Configuration: Static
-    IPv4 Address: 10.0.10.1/24
-
-#### Enable DHCP for Management:
-
-Go to Services &rarr; DHCP Server and open the MGNT_VLAN10 tab.
-
-Enable DHCP and set the range to:
-
-## Interfaces
-
-| Interface | VLAN | Gateway |
-| --------- | ---- | ------- |
-| LAN       |      |         |
-|           |      |         |
-|           |      |         |
-|           |      |         |
-|           |      |         |
-|           |      |         |
-|           |      |         |
-
-![Interface Assignment]()
-
 # Testing
 
 ## Connectivity Tests
@@ -187,6 +136,25 @@ From mgnt-box browser:
     https://10.0.0.1
 
 ![dashboard](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/pfsense/Screenshot%20From%202026-10-23%2016-32-39.png)
+
+# Firewall Configuration
+
+## Default Rules
+
+(To be updated)
+
+# VLAN Configuration
+
+Read [host-system](../docs/host-system.md) first for bridge configuration and [testing](./docs/testing.md) for the temporary VLAN configuration tests.
+
+## Interfaces
+
+| Interface | VLAN | Gateway |
+| --------- | ---- | ------- |
+| LAN       |      |         |
+|           |      |         |
+
+![Interface Assignment]()
 
 # Challenges Encountered
 
