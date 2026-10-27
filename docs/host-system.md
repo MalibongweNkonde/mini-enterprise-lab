@@ -97,3 +97,27 @@ Diagnostics &rarr; Command Prompt.
 ![Inside pfSense](../screenshots/host-system/Screenshot%20From%202026-10-23%2016-40-04.png)
 
 We see vtnet2 show up with the MAC address 52:54:00:10:00:01, the same address from our other screenshots.
+
+## Backup
+
+#### Create Checkpoint
+
+Backup libvirt definitions and export the pfSense configuration:
+
+    ssudo virsh net-dumpxml pfwan > labs-backups/2026-10-23/pfwan.xml
+    
+    sudo virsh net-dumpxml pflan > labs-backups/2026-10-23/pflan.xml
+    
+    sudo virsh dumpxml fw-pfsense > lab-backups/2026-10-23/fw-pfsense.xml
+    
+    sudo virsh dumpxml mgnt-box > labs-backups/2026-10-23/mgnt-box.xml
+    
+    ls -lh labs-backups/2026-10-23/
+
+![backed up](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-23%2020-57-12.png)
+
+### Export the pfSense configuration
+
+On the web interface go to Diagnostics &rarr; Backup and Restore. Download the configuration XML and store it safely. I moved it out of the VM by attaching a USB. I will store it along with my libvirt backups.
+
+![config downloaded]()
