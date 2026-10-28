@@ -36,11 +36,11 @@ Management VM: mgnt-box
 
 #### Existing Network - Recovery Path
 
-| Componet             | Connection     | Purpose                        |
-| -------------------- | -------------- | ------------------------------ |
-| pfSense WAN          | pfwan / virbr1 | WAN connectivity               |
-| pfSense existing LAN | pflan / virbr2 | Existing LAN and recovery path |
-| mgnt-box NIC         | pflan / virbr2 | Current management access      |
+| Connection     | Purpose                        |
+| -------------- | ------------------------------ |
+| pfwan / virbr1 | WAN connectivity               |
+| pflan / virbr2 | Existing LAN and recovery path |
+| pflan / virbr2 | Current management access      |
 
 Exisiting bootstrap LAN: 10.0.0.0/24
 
@@ -79,7 +79,41 @@ Enable DHCP and set the range to:
 
     Range: 10.0.10.100 - 10.0.10.200
     Gateway: 10.0.10.1
-    
+
+### Manangement VM
+
+#### Add second network adapter
+
+Create the network interface definition:
+
+    cat > /tmp/mgnt-vlan10.xml <<'EOF'
+    <interface type='bridge'>
+      <mac address='52:54:00:10:00:02'/>
+      <source bridge='br-vlan'/>
+      <model type='virtio'/>
+      <vlan>
+        <tag id='10'/>
+      </vlan>
+    </interface>
+    EOF
+
+Attach it live only:
+
+    sudo virsh attach-device mgnt-box /tmp/mgnt-vlan10.xml --live
+
+![commands](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-28%2017-47-18.png)
+
+Check if it attached successfully:
+
+![attached successfully](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-28%2017-51-19.png)
+
+We can see vtnet4 is present alongside pflan and possessing a vlan-id of 10.
+
+
+
+
+
+
 
 #### Verified Results
 
