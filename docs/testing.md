@@ -109,9 +109,11 @@ Check if it attached successfully:
 
 We can see vtnet4 is present alongside pflan and possessing a vlan-id of 10.
 
+On mgnt-box I then requested a new temporary IP from DHCP and created a new firewall rule to allow access from VLAN 10 to pfSense:
 
+![pfSense firewall rule](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-28%2020-26-26.png)
 
-
+![ping successful](/home/bonga/Documents/labs/mini-enterprise-lab/screenshots/host-system/Screenshot%20From%202026-10-28%2020-26-36.png)
 
 
 
